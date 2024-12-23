@@ -1,0 +1,13 @@
+# Include .gitignore from client directory
+/client/**
+!/client/.gitignore
+
+# Include .gitignore from server directory
+/server/**
+!/server/.gitignore
+
+# Ignore node_modules in the client folder
+client/node_modules/
+
+# Ignore node_modules in the server folder
+server/node_modules/
