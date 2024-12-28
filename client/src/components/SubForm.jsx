@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
+// eslint-disable-next-line react/prop-types
 const SubForm = ({ mode }) => {
   const { id } = useParams();
   const navigate = useNavigate();
