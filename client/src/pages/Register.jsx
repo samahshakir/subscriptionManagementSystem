@@ -7,16 +7,39 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [formError, setFormError] = useState('');
   const navigate = useNavigate();
+
+  const validateForm = () => {
+    if (!name || name.length < 3) {
+      setFormError('Name must be at least 3 characters long.');
+      return false;
+    }
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      setFormError('Please enter a valid email.');
+      return false;
+    }
+    if (!password || password.length < 6) {
+      setFormError('Password must be at least 6 characters long.');
+      return false;
+    }
+    setFormError(''); // Clear any existing validation errors
+    return true;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     try {
       const response = await register({ name, email, password });
       console.log(response);
       navigate('/login');
     } catch (err) {
-      setError(err);
+      setError('Registration failed. Please try again.');
     }
   };
 
@@ -28,6 +51,7 @@ const Register = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6">Register</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
+        {formError && <p className="text-red-500 mb-4">{formError}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name</label>
