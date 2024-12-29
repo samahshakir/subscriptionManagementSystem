@@ -27,3 +27,4 @@ client/*.sw?
 # Ignore node_modules in the server folder
 server/node_modules/
 server/uploads
+server/.env
